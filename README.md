@@ -1,6 +1,6 @@
 # CryptoChart
 
-A very basic Bitcoin price visuqlization tool for mobile.
+A very basic Bitcoin price visualization tool for mobile.
 
 ## Table of Contents
 
