@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { VictoryLine, VictoryChart, VictoryTheme } from "victory-native";
+import { VictoryAxis, VictoryLabel, VictoryLine, VictoryChart, VictoryTheme } from "victory-native";
 import axios from 'axios';
 
 export default class HistoricalScreen extends Component {
@@ -9,7 +9,7 @@ export default class HistoricalScreen extends Component {
     this.state = {
       data: [
         { date: '2019-01-01', price: 0 },
-        { date: '2019-01-02', price: 1 },
+        { date: '2019-01-02', price: 0 },
       ],
     }
   }
@@ -31,15 +31,33 @@ export default class HistoricalScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.getStartedText}>
+          BTC historical price
+        </Text>
         <VictoryChart
-          padding={{ bottom: 50, left: 60, right: 20 }}
+          padding={{ bottom: 100, left: 60, right: 20 }}
           theme={VictoryTheme.material}
         >
           <VictoryLine
+            animate={{ duration: 2000, onLoad: { duration: 1000 } }}
             data={this.state.data}
-            // domainPadding={{ x: 0, y: 200 }}
             x="date"
             y="price"
+          />
+          <VictoryAxis
+            tickLabelComponent={
+              <VictoryLabel
+                angle={-45}
+                textAnchor="end"
+              />}
+            standalone={false}
+            tickCount={6}
+          />
+          <VictoryAxis
+            tickLabelComponent={<VictoryLabel />}
+            dependentAxis
+            standalone={false}
+            tickCount={6}
           />
         </VictoryChart>
       </View>
